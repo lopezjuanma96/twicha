@@ -1,0 +1,23 @@
+### guide https://levelup.gitconnected.com/how-to-set-up-a-typescript-node-js-app-in-5-minutes-93ffee3b1768
+yarn init -y
+yarn add -D typescript
+yarn tsc --init --rootDir src --outDir dist ### tsc command is available after installing typescript
+yarn add express
+yarn add -D @types/node @types/express ### allows importing special nodeJs and express types 
+yarn add -D nodemon ts-node ### nodemon for a daemon on dev, ts-node so that nodemon does not have to recompile every reload (runs directly from ts files)
+npm init @eslint/config ### follow the steps to setups linting
+
+ADD THIS TO PACKAGE.JSON (appareantly the nodemon part is not updated, so follow this https://blog.logrocket.com/configuring-nodemon-with-typescript/)
+"scripts": {
+    "dev": "npx nodemon src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  }
+
+AND CREATE NODEMON.JSON WITH
+{
+    "execMap": {
+        "ts": "ts-node"
+    },
+    "watch": ["./src/**/*.ts"]
+}
