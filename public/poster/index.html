@@ -10,6 +10,12 @@
     <h2>This is the Poster</h2>
     <a href="/shower">See other posts!</a>
 
+    <div class="postForm">
+        <label id="postLabel">Message:</label>
+        <input id="postInput">
+        <button id="postSendButton" type="button">Send</button>
+    </div>
+
     <script src="/socket.io/socket.io.js"></script> <!--By default, the Socket.IO server exposes a client bundle at /socket.io/socket.io.js, unless Server Instantiation declares serveClient = false-->
     <script src="./logic/main.js"></script>
 </body>

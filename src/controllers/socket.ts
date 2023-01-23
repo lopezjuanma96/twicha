@@ -17,8 +17,15 @@ export function createSocket(app: Application): HttpServer {
     io.on("connection", client => {
         const url: string = client.request.headers.referer;
         const host: string = client.request.headers.host;
-        if (url.includes("shower")) console.log("new user in shower");
-        else if (url.includes("poster")) console.log("new user in poster");
+        if (url.includes("shower")) {
+            console.log("new user in shower");
+            client.emit("ip", process.env.IP);
+        } else if (url.includes("poster")) {
+            console.log("new user in poster");
+            client.on("post", (msg, user) => {
+                io.emit("distribute", msg, user)
+            })
+        }
     })
 
     return https;

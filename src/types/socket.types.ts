@@ -1,11 +1,12 @@
 //following https://socket.io/docs/v4/typescript/#types-for-the-server
 
 export interface ServerToClient {
-    distribute: (msg: string, name: string) => void;
+    ip: (value: string) => void;
+    distribute: (msg: string, user: string) => void;
 }
 
 export interface ClientToServer {
-    post: (msg: string, name: string) => void;
+    post: (msg: string, user: string) => void;
 }
 
 export interface InterServer {
