@@ -1,7 +1,6 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
+import { handleGetShower } from "../controllers/shower";
 
 export const router: Router = Router();
 
-router.get("/", (req: Request, res: Response) => {
-    res.status(200).redirect("/shower")
-})
+router.get("/", handleGetShower);

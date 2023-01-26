@@ -1,7 +1,7 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
+
+import { handleGetPoster } from "../controllers/poster";
 
 export const router: Router = Router();
 
-router.get("/", (req: Request, res: Response) => {
-    res.status(200).redirect("/poster")
-});
+router.get("/", handleGetPoster);
