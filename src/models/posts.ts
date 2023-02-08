@@ -1,31 +1,33 @@
-import { PathOrFileDescriptor, readFileSync } from "fs";
+import { PathOrFileDescriptor, readFileSync, writeFileSync } from "fs";
 import { Post } from "posts.types";
 
 const postFilePath: PathOrFileDescriptor = "../data/posts.json";
 
 export class Posts{
 
+    private static instance: Posts;
+
     temporalPosts: Array<Post>;
     permanentPosts: Array<Post>;
     expiration: number;
     permanentProbability: number; //probability of returning a permanent post on getPost
 
-    constructor(_exp: number = 24*60*60*1000, _prob: number = 0.1){ //one day is default expiration
-        this.expiration = _exp;
-        this.permanentProbability = _prob;
-        const oldPostsFile: string = readFileSync(postFilePath, {encoding: 'utf-8'});
-        if (oldPostsFile) {
-            const oldPosts: Array<Post> = JSON.parse(oldPostsFile);
-            this.temporalPosts = oldPosts.filter(e => !e.permanent && (Date.now() - e.date) < this.expiration);
-            this.permanentPosts = oldPosts.filter(e => e.permanent)
-        } else {
-            this.temporalPosts = []; //here load old posts that are still valid  
-            this.permanentPosts = []; //here load old posts
-        }
+    constructor(){ //one day is default expiration
+        this.expiration = 24*60*60*1000;
+        this.permanentProbability = 0.1;
+        this.loadPosts();
+    }
+
+    static getInstance(): Posts {
+        if (!Posts.instance) Posts.instance = new Posts();
+        return Posts.instance;
     }
 
     getExpiration(): number {return this.expiration};
     setExpiration(val: number): void {this.expiration = Math.floor(val)}
+
+    getPermanentProbability(): number {return this.permanentProbability}
+    setPermanentProbability(val: number): void {this.permanentProbability = val}
     
     addTemporalPost(user: string, message: string): Post {
         const toAdd: Post = {
@@ -56,6 +58,7 @@ export class Posts{
         return this.temporalPosts.splice(-1, 1)[0];
     }
     private getPermanentPost(): Post {
+        if (this.permanentPosts.length == 0) return;
         const index = Math.floor(this.permanentPosts.length * Math.random());
         return this.permanentPosts[index];
     }
@@ -65,6 +68,25 @@ export class Posts{
         if (returnPermanent || this.temporalPosts.length > 0) return this.getPermanentPost();
         else this.getTemporalPost();
     }
+    getPostsLength(): number {
+        return this.temporalPosts.length + this.permanentPosts.length;
+    }
 
-    savePosts(): {}
+    async savePosts(): Promise<void> {
+        const saveObj: Object = {temporal: this.temporalPosts, permanent: this.permanentPosts}
+        return writeFileSync(postFilePath, JSON.stringify(saveObj), {encoding: 'utf-8'})
+    }
+    loadPosts(): void {
+        try {
+            const oldPostsFile: string = readFileSync(postFilePath, {encoding: 'utf-8'});
+            const oldPosts: Array<Post> = JSON.parse(oldPostsFile);
+            this.temporalPosts = oldPosts.filter(e => !e.permanent && (Date.now() - e.date) < this.expiration); //here load old posts that are still valid  
+            this.permanentPosts = oldPosts.filter(e => e.permanent) //here load old posts
+        } catch (e) {
+            if (e.code == 'ENOENT') {
+                this.temporalPosts = [];
+                this.permanentPosts = [];
+            } else throw e;
+        }
+    }
 }
