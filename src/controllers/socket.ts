@@ -3,6 +3,9 @@ import { Server as HttpServer } from "http"; //Im sure there's a way to extract 
 import * as http from "http";
 import { Application } from "express";
 import { ClientToServer, InterServer, ServerToClient, SocketData } from "socket.types"; //shouldn't need to use full path bc of includes in tsconfig
+import { Posts } from "../models/posts";
+import { connectShowerSocket } from "./shower";
+import { connectPosterSocket } from "./poster";
 
 export function createSocket(app: Application): HttpServer {
 
@@ -17,15 +20,8 @@ export function createSocket(app: Application): HttpServer {
     io.on("connection", client => {
         const url: string = client.request.headers.referer;
         const host: string = client.request.headers.host;
-        if (url.includes("shower")) {
-            console.log("new user in shower");
-            client.emit("ip", process.env.IP);
-        } else if (url.includes("poster")) {
-            console.log("new user in poster");
-            client.on("post", (msg, user) => {
-                io.emit("distribute", msg, user)
-            })
-        }
+        if (url.includes("shower")) connectShowerSocket(client, io)
+        else if (url.includes("poster")) connectPosterSocket(client, io)
     })
 
     return https;

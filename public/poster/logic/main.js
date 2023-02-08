@@ -9,6 +9,6 @@ postSendButton.addEventListener("click", e => {
     if (msg) if (msg.length > 0) {
         postInput.value = "";
         console.log("message is", msg)
-        socket.emit("post", msg, "USERUSER")
+        socket.emit("post", "user", msg)
     }
 })

@@ -65,8 +65,8 @@ export class Posts{
 
     getPost(): Post {
         const returnPermanent = Math.random() <= this.permanentProbability;
-        if (returnPermanent || this.temporalPosts.length > 0) return this.getPermanentPost();
-        else this.getTemporalPost();
+        if (returnPermanent || this.temporalPosts.length == 0) return this.getPermanentPost();
+        else return this.getTemporalPost();
     }
     getPostsLength(): number {
         return this.temporalPosts.length + this.permanentPosts.length;

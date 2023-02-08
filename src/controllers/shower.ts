@@ -6,7 +6,7 @@ import { Socket, Server as IOServer } from "socket.io";
 let currentPost: Post;
 const connectedShowers: Map<string, Socket> = new Map();
 
-function setNewPostTimeout(): void{
+function setNewPostTimeout(): void {
     currentPost = Posts.getInstance().getPost();
     for (let id of connectedShowers.keys()) connectedShowers.get(id).emit("distribute", currentPost);
     setTimeout(setNewPostTimeout, 10000)

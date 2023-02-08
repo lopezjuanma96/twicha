@@ -9,7 +9,7 @@ export interface ServerToClient {
 }
 
 export interface ClientToServer {
-    post: (msg: string, user: string) => void,
+    post: (user: string, msg: string) => void,
     request: () => void;
 }
 
