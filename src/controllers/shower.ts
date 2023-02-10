@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { Posts } from "../models/posts";
 import { Post } from "posts.types";
 import { Socket, Server as IOServer } from "socket.io";
+import { Configs } from "../models/config";
 
 let currentPost: Post;
 const connectedShowers: Map<string, Socket> = new Map();
@@ -9,7 +10,7 @@ const connectedShowers: Map<string, Socket> = new Map();
 function setNewPostTimeout(): void {
     currentPost = Posts.getInstance().getPost();
     for (let id of connectedShowers.keys()) connectedShowers.get(id).emit("distribute", currentPost);
-    setTimeout(setNewPostTimeout, 10000)
+    setTimeout(setNewPostTimeout, Configs.getInstance().getNewPostTimeout())
 }
 
 setNewPostTimeout()

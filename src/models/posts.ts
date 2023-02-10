@@ -1,7 +1,7 @@
 import { PathOrFileDescriptor, readFileSync, writeFileSync } from "fs";
 import { Post } from "posts.types";
 
-const postFilePath: PathOrFileDescriptor = "../data/posts.json";
+const postFilePath: PathOrFileDescriptor = process.env.POST_PATH;
 
 export class Posts{
 
