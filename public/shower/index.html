@@ -7,10 +7,21 @@
     <title>Shower</title>
 </head>
 <body>
-    <h2>This is the Shower</h2>
+    <div class="newPostBlock">
+        <div class="newPostTitleBlock">
+            <h2 id="newPostTitle"></h2>
+        </div>
+        <h2 id="newPostText"></h2>
+    </div>
+
     <a href="/poster">Post Something!</a>
 
-    <div id="postList">
+    <div class="postListBlock">
+        <div class="postListTitleBlock">
+            <h2 id="postListTitle">People before said...</h2>
+        </div>
+        <div id="postList">
+        </div>
     </div>
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js" integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI" crossorigin="anonymous"></script>
     <script src="./logic/main.js"></script>
