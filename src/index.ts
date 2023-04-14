@@ -17,6 +17,8 @@ import { router as showerRouter } from "./routes/shower";
 const app = express();
 const PORT = process.env.PORT || 8080;
 app.use("/", express.static(process.env.PUBLIC_DIR))
+app.use("/css", express.static(process.env.PUBLIC_DIR + "/../node_modules/bootstrap/dist/css"))
+app.use("/js", express.static(process.env.PUBLIC_DIR + "/../node_modules/bootstrap/dist/js"))
 
 app.use("/post", posterRouter)
 app.use("/show", showerRouter)

@@ -4,19 +4,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"> <!--this /css does not refer to the folder css but the path on the server that's been exposed with express static in index.ts-->
+    <link rel="stylesheet" href="styles/main.css">
     <title>Poster</title>
 </head>
 <body>
-    <h2>This is the Poster</h2>
-    <a href="/shower">See other posts!</a>
 
-    <div class="postForm">
-        <label id="postLabel">Message:</label>
-        <input id="postInput">
-        <button id="postSendButton" type="button">Send</button>
+    <div class="row h-100 w-100 p-5">
+
+        <!--Title-->
+        <div class="container align-self-start">
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10 d-flex justify-content-center">
+                    <h1 id="postTitle">Poster</h1>
+                </div>
+                <div class="col-1 d-none">
+                    <a href="#">
+                        <img src="#" alt="portfolio"> <!--this would be a logo that slides down  from where the text below slides down on hover-->
+                        <p class="small">see my other projects!</p>
+                    </a>
+                </div>
+            </div>    
+        </div>
+        
+        <!--Form-->
+        <div class="container align-self-center gy-5" id="postForm">
+            <div class="row justify-content-center px-2 px-md-5">
+                <label class="pe-5 form-label h3" id="postLabel">What is on your mind?</label>
+            </div>
+            <div class="row justify-content-center px-2 px-md-5">
+                <div class="col-12 col-md-10">
+                    <input class="form-control" id="postInput">
+                </div>
+                <div class="col-12 col-md-2">
+                    <button class="btn btn-primary" id="postSendButton" type="button">Send</button>
+                </div>
+            </div>
+        </div>      
+        
+        <!--Go to Shower-->
+        <div class="container align-self-end">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <a href="/shower">    
+                        <img id="showerQR" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=http://localhost:8080/shower" alt="showerQR"> 
+                        <!--might be too slow but it works for now-->
+                        <!--and when working on the network you won't use localhost but the public ip adress of the server-->
+                        <p class="small">See other posts!</p>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-
     <script src="/socket.io/socket.io.js"></script> <!--By default, the Socket.IO server exposes a client bundle at /socket.io/socket.io.js, unless Server Instantiation declares serveClient = false-->
     <script src="./logic/main.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </body>
 </html>

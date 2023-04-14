@@ -21,3 +21,9 @@ AND CREATE NODEMON.JSON WITH
     },
     "watch": ["./src/**/*.ts"]
 }
+
+#############################
+## Access to/from WSL: 
+#############################
+- on the same device you can use localhost, which is fine for testing
+- on another device, follow this https://superuser.com/questions/1131874/how-to-access-localhost-of-linux-subsystem-from-windows
