@@ -29,25 +29,29 @@
         </div>
         
         <!--Form-->
-        <div class="container align-self-center gy-5" id="postForm">
-            <div class="row justify-content-center px-2 px-md-5">
-                <label class="pe-5 form-label h3" id="postLabel">What is on your mind?</label>
-            </div>
+        <div class="container align-self-center" id="postForm">
             <div class="row justify-content-center px-2 px-md-5">
                 <div class="col-12 col-md-10">
-                    <input class="form-control" id="postInput">
+                    <label class="pe-5 form-label h3" id="postLabel">What is your name?</label>
+                    <input class="form-control" id="postInputUser">
                 </div>
-                <div class="col-12 col-md-2">
-                    <button class="btn btn-primary" id="postSendButton" type="button">Send</button>
+                <div class="col-12 col-md-10 pt-3">
+                    <label class="pe-5 form-label h3" id="postLabel">What is on your mind?</label>
+                    <textarea class="form-control" id="postInputMsg"></textarea>
+                </div>
+            </div>
+            <div class="row px-2 px-md-5 pt-3">    
+                <div class="col-12 d-flex justify-content-center">
+                    <button class="btn btn-primary px-md-4 py-md-2" id="postSendButton" type="button">Send</button>
                 </div>
             </div>
         </div>      
         
         <!--Go to Shower-->
         <div class="container align-self-end">
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <a href="/shower">    
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <a class="d-flex flex-column justify-content-center" href="/shower">    
                         <img id="showerQR" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=http://localhost:8080/shower" alt="showerQR"> 
                         <!--might be too slow but it works for now-->
                         <!--and when working on the network you won't use localhost but the public ip adress of the server-->
