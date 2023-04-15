@@ -9,22 +9,61 @@
     <title>Shower</title>
 </head>
 <body>
-    <div class="newPostBlock">
-        <div class="newPostTitleBlock">
-            <h2 id="newPostTitle"></h2>
-        </div>
-        <h2 id="newPostText"></h2>
-    </div>
+    <div class="row h-100 w-100 p-5">
 
-    <a href="/poster">Post Something!</a>
-
-    <div class="postListBlock">
-        <div class="postListTitleBlock">
-            <h2 id="postListTitle">People before said...</h2>
+        <!--Title-->
+        <div class="container align-self-start">
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10 d-flex justify-content-center">
+                    <h1 id="postTitle">Shower</h1>
+                </div>
+                <div class="col-1 d-none">
+                    <a href="#">
+                        <img src="#" alt="portfolio"> <!--this would be a logo that slides down  from where the text below slides down on hover-->
+                        <p class="small">see my other projects!</p>
+                    </a>
+                </div>
+            </div>    
         </div>
-        <div id="postList">
+        
+        <!--New Post-->
+        <div class="container align-self-center" id="newPostContainer">
+            <div class="row justify-content-center">
+                <div class="card w-50" id="newPostCard">
+                    <p class="h2" id="newPostTitle"></p>
+                    <p class="lead" id="newPostText"></p>
+                </div>
+            </div>
+        </div>
+
+        <!--Other Posts-->
+        <div class="container align-self-center" id="otherPostsContainer">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <h2 id="postListTitle">People before said...</h2>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <div id="postList"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!--Go to Poster-->
+        <div class="container align-self-end">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <a class="d-flex flex-column justify-content-center" href="/poster">    
+                        <img id="posterQR" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=http://localhost:8080/poster" alt="posterQR"> 
+                        <!--might be too slow but it works for now-->
+                        <!--and when working on the network you won't use localhost but the public ip adress of the server-->
+                        <p class="small">Post Something!</p>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
+    
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js" integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI" crossorigin="anonymous"></script>
     <script src="./logic/main.js"></script>
     <script src="/js/bootstrap.min.js"></script>
